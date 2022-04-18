@@ -133,7 +133,7 @@ function newPage(index){
     apt_list[i].innerHTML=
       "<div class='collapsible-header'>"+
 
-            "<strong>" + CurrentData[i + 5*page].name+"</strong>" +
+            "<strong>" + CurrentData[i + 4*page].name+"</strong>" +
 
       "</div>" ;
   }
@@ -141,7 +141,7 @@ function newPage(index){
 
 function findApt(index){
 
-  var aptdata = CurrentData[index + 5*page];
+  var aptdata = CurrentData[index + 4*page];
   var lat = aptdata.latitude
   var lot = aptdata.longitude
 
@@ -191,6 +191,17 @@ function gettingresult(e){
   }
 
   map.addLayer(markers);
+
+  page = 0
+
+  for(var i = 0; i < 5; i++){
+    apt_list[i].innerHTML=
+      "<div class='collapsible-header'>"+
+
+              "<strong>" + CurrentData[i + 4 * page].name+"</strong>" +
+
+      "</div>" ;
+  }
 }
 
 //-----------------------------------------------apartment name search-------------------------------------------------------//
@@ -233,6 +244,18 @@ function searchApartment(element){
     }
 
     map.addLayer(markers);
+
+    page = 0
+
+    for(var i = 0; i < 5; i++){
+      apt_list[i].innerHTML=
+        "<div class='collapsible-header'>"+
+  
+                "<strong>" + CurrentData[i + 4 * page].name+"</strong>" +
+  
+        "</div>" ;
+    }
+
   }else{
    var key_search = element.value.toString().toLowerCase();
 
@@ -262,6 +285,17 @@ function searchApartment(element){
 
       markers.addLayer(marker);
 
+   }
+
+   page = 0
+
+   for(var i = 0; i < 5; i++){
+     apt_list[i].innerHTML=
+       "<div class='collapsible-header'>"+
+ 
+               "<strong>" + CurrentData[i + 4 * page].name+"</strong>" +
+ 
+       "</div>" ;
    }
 
    map.addLayer(markers);
