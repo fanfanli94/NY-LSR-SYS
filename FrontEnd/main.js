@@ -41,10 +41,10 @@ function dataSort(dataInput){
   dataInput.sort(function(a, b) {
     if(a.rating != b.rating){
       return b.rating - a.rating;
-    } 
+    }
     else {
-      var nameA = a.name.toUpperCase(); 
-      var nameB = b.name.toUpperCase(); 
+      var nameA = a.name.toUpperCase();
+      var nameB = b.name.toUpperCase();
       if (nameA < nameB) {
         return -1;
       }
@@ -77,19 +77,22 @@ attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStree
 ).addTo(map);
 
 var markers = new L.MarkerClusterGroup();
-var AllData, CurrentData; 
+var AllData, CurrentData;
 $.get('apartments.csv', function(csvString) {
 
   // Use PapaParse to convert string to array of objects
   var data = Papa.parse(csvString, {header: true, dynamicTyping: true}).data;
   // For each row in data, create a marker and add it to the map
   // For each row, columns `Latitude`, `Longitude`, and `Title` are required
-  
+
   for (var i in data) {
     var row = data[i];
-    
+
     var marker = L.marker([row.latitude, row.longitude], {
-      opacity: 1
+      opacity: 1,
+      icon: L.icon({
+        iconUrl: 'pin.png',
+        iconSize: [35, 35]})
     }).bindPopup(row.name);
 
     marker.on("mouseover", function () {
@@ -113,9 +116,9 @@ $.get('apartments.csv', function(csvString) {
   for(var i = 0; i < 5; i++){
     apt_list[i].innerHTML=
       "<div class='collapsible-header'>"+
-          "<div class='row'>"+
-            "<strong>" + AllData[i].name+"</strong><br>" +
-          "</div>" 
+
+              "<strong>" + AllData[i].name+"</strong>" +
+
       "</div>" ;
   }
 });
@@ -129,9 +132,9 @@ function newPage(index){
   for(var i = 0; i < 5; i++){
     apt_list[i].innerHTML=
       "<div class='collapsible-header'>"+
-          "<div class='row'>"+
-            "<strong>" + CurrentData[i + 5*page].name+"</strong><br>" +
-          "</div>" 
+
+            "<strong>" + CurrentData[i + 5*page].name+"</strong>" +
+
       "</div>" ;
   }
 }
@@ -158,7 +161,7 @@ function gettingresult(e){
   Mapclean();
   e.preventDefault();
   var rate = rate_slider.noUiSlider.get().map(val =>{ return parseFloat(val);});
-  
+
   markers = new L.MarkerClusterGroup();
 
   CurrentData = AllData.filter(d => {
@@ -170,23 +173,23 @@ function gettingresult(e){
 
   for (var i in CurrentData) {
     var row = CurrentData[i];
-    
+
     var marker = L.marker([row.latitude, row.longitude], {
       opacity: 1
     }).bindPopup(row.name);
-  
+
     marker.on("mouseover", function () {
       this.openPopup();
     });
-  
+
     marker.on("mouseout", function () {
       this.closePopup();
     });
-  
+
     markers.addLayer(marker);
-     
+
   }
-  
+
   map.addLayer(markers);
 }
 
@@ -194,13 +197,13 @@ function gettingresult(e){
 
 function searchApt_keyPress(e){
   if(e.keyCode === 13){
-    e.preventDefault(); 
+    e.preventDefault();
     searchApartment(e.currentTarget);
   }
 }
 
 function searchApartment(element){
-  
+
   Mapclean();
 
   if(typeof element === "undefined"){
@@ -213,60 +216,55 @@ function searchApartment(element){
 
     for (var i in CurrentData) {
       var row = CurrentData[i];
-    
+
       var marker = L.marker([row.latitude, row.longitude], {
           opacity: 1
       }).bindPopup(row.name);
-  
+
       marker.on("mouseover", function () {
         this.openPopup();
       });
-  
+
       marker.on("mouseout", function () {
         this.closePopup();
       });
-  
+
       markers.addLayer(marker);
-    } 
-  
+    }
+
     map.addLayer(markers);
   }else{
    var key_search = element.value.toString().toLowerCase();
-    
+
    markers = new L.MarkerClusterGroup();
-   
+
    CurrentData = AllData.filter(d => {
     return d.name.toLowerCase().includes(key_search);
    });
 
    dataSort(CurrentData);
    console.log(CurrentData);
-   
+
    for (var i in CurrentData) {
       var row = CurrentData[i];
-      
+
       var marker = L.marker([row.latitude, row.longitude], {
         opacity: 1
       }).bindPopup(row.name);
-  
+
       marker.on("mouseover", function () {
         this.openPopup();
       });
-  
+
       marker.on("mouseout", function () {
         this.closePopup();
       });
-  
-      markers.addLayer(marker);  
-      
-   } 
- 
+
+      markers.addLayer(marker);
+
+   }
+
    map.addLayer(markers);
 
   }
 }
-
-
-
-
-

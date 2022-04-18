@@ -17,7 +17,7 @@
 
 <body>
   <div class="row" id="grid">
-    <div class="col s3 filter" id="filter-panel">
+    <div class="col s12 m2 filter" id="filter-panel">
 
         <nav class="light-blue darken-2">
             <div class="nav-wrapper row">
@@ -50,23 +50,13 @@
                   <div class="chips chips-autocomplete" id="category_chips"></div>
           </div>
           <div class="row">
-              <div class="col offset-s3">
+              <div class="col offset-s2">
                   <button type='button' class="btn waves-effect waves-light cyan darken-2" onclick="gettingresult(event)">Search</button>
               </div>
           </div>
         </form>
 
-        <div class = "ranking list">
-          <div class="list"  id="search-container">
-            <ul class = "apartment_list">
-                <li class = "apt" onclick="findApt(0)"></li>
-                <li class = "apt" onclick="findApt(1)"></li>
-                <li class = "apt" onclick="findApt(2)"></li>
-                <li class = "apt" onclick="findApt(3)"></li>
-                <li class = "apt" onclick="findApt(4)"></li>
-            </ul>
-          </div>
-        </div>
+
 
         <ul class="pagination">
           <li class="disabled page-num" onclick="newPage(0)"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
@@ -80,7 +70,66 @@
 
       </div>
 
-      <div class="col s9" id="map"></div>
+      <div class="col s0 m10">
+      <div id="map"></div>
+
+
+        <div class = "ranking list">
+          <div class="list"  id="search-container">
+            <ul class = "apartment_list">
+              <div class="col s2">
+                <div class="card">
+                  <div class="card-content">
+                    <p>Apartment1</p>
+                  </div>
+                <li class = "apt" onclick="findApt(0)"></li>
+                </div>
+                </div>
+
+                <div class="col s2">
+                <div class="card">
+                  <div class="card-content">
+                    <p>Apartment2</p>
+                  </div>
+                <li class = "apt" onclick="findApt(1)"></li>
+                </div>
+                </div>
+
+                <div class="col s2">
+                <div class="card">
+                  <div class="card-content">
+                    <p>Apartment3</p>
+                  </div>
+                <li class = "apt" onclick="findApt(2)"></li>
+                </div>
+                </div>
+
+                <div class="col s2">
+                <div class="card">
+                  <div class="card-content">
+                    <p>Apartment4</p>
+                  </div>
+                <li class = "apt" onclick="findApt(3)"></li>
+                </div>
+                </div>
+
+                <div class="col s2">
+                <div class="card">
+                  <div class="card-content">
+                    <p>Apartment5</p>
+                  </div>
+                <li class = "apt" onclick="findApt(4)"></li>
+                </div>
+                </div>
+            </ul>
+
+        </div>
+
+
+
+
+     </div>
+      </div>
 
   </div>
   <script src="nouislider.js"></script>
