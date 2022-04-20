@@ -83,6 +83,11 @@ noUiSlider.create(price_slider, {
   }),
   pips: {mode: 'range', density: 10}
 });
+//-----------------------------------------------zoom back-------------------------------------------------------//
+
+function zoomback(){
+  map.setView([40.71427, -74.00597],10);
+}
 
 //-----------------------------------------------sort the data-------------------------------------------------------//
 
@@ -168,24 +173,36 @@ $.get('apt_final.csv', function(csvString) {
     marker.index = i
 
     function add_marker(d){var i = d.target.index
-    for (var j in ResData){
-    if (ResData[j].cluster === data[i].cluster)
-  {var res_marker = L.marker(
-    [ResData[j].latitude, ResData[j].longitude],
-    {opacity: 1,
-      icon: L.icon({
-        iconUrl: 'restaurant.png',
-        iconSize: [30, 30]})}
-  ).addTo(res_markers)}}}
+      for (var j in ResData){
+        if (ResData[j].cluster === data[i].cluster){
+          var res_marker = L.marker(
+            [ResData[j].latitude, ResData[j].longitude],{
+            opacity: 1,
+            icon: L.icon({
+            iconUrl: 'restaurant.png',
+            iconSize: [30, 30]})}
+             ).addTo(res_markers)
+          .bindPopup(ResData[j].name);
+          
+          res_marker.on("mouseover", function () {
+              this.openPopup();
+            });
+        
+          res_marker.on("mouseout", function () {
+              this.closePopup();
+            });
+              
+        }
+      }
+    }
 
     marker.on('click',function(d) {
-
-
-    if(res_markers.getLayers().length>0){res_markers.clearLayers();console.log('the map had the layer');}
-    add_marker(d);
-
-
-  })
+      if(res_markers.getLayers().length>0){
+        res_markers.clearLayers();
+        console.log('the map had the layer');
+      }
+      add_marker(d);
+    })
 
 
     markers.addLayer(marker);
@@ -283,27 +300,40 @@ function gettingresult(e){
     marker.on("mouseout", function () {
       this.closePopup();
     });
+
     marker.index = i
 
     function add_marker(d){var i = d.target.index
-    for (var j in ResData){
-    if (ResData[j].cluster === CurrentData[i].cluster)
-  {var res_marker = L.marker(
-    [ResData[j].latitude, ResData[j].longitude],
-    {opacity: 1,
-      icon: L.icon({
-        iconUrl: 'restaurant.png',
-        iconSize: [30, 30]})}
-  ).addTo(res_markers)}}}
+      for (var j in ResData){
+        if (ResData[j].cluster === data[i].cluster){
+          var res_marker = L.marker(
+            [ResData[j].latitude, ResData[j].longitude],{
+            opacity: 1,
+            icon: L.icon({
+            iconUrl: 'restaurant.png',
+            iconSize: [30, 30]})}
+             ).addTo(res_markers)
+          .bindPopup(ResData[j].name);
+          
+          res_marker.on("mouseover", function () {
+              this.openPopup();
+            });
+        
+          res_marker.on("mouseout", function () {
+              this.closePopup();
+            });
+              
+        }
+      }
+    }
 
     marker.on('click',function(d) {
-
-
-    if(res_markers.getLayers().length>0){res_markers.clearLayers();console.log('the map had the layer');}
-    add_marker(d);
-
-
-  })
+      if(res_markers.getLayers().length>0){
+        res_markers.clearLayers();
+        console.log('the map had the layer');
+      }
+      add_marker(d);
+    })
 
 
     markers.addLayer(marker);
@@ -338,39 +368,53 @@ function searchApartment(element){
       var row = CurrentData[i];
 
       var marker = L.marker([row.latitude, row.longitude], {
-          opacity: 1,
-          icon: L.icon({
-            iconUrl: 'apartment.png',
-            iconSize: [35, 35]})
-      }).bindPopupbindPopup(row.name + "</br>" + "<div class='chip' id='one_chip'> Apartment Rating:"+row.rating +"</div>" +"</br>" +"<div class='chip'>" + row.keyword1 +"</div>"  +"<div class='chip'>" + row.keyword2 +"</div>"  +"<div class='chip'>" + row.keyword3 +"</div>");
-
+        opacity: 1,
+        icon: L.icon({
+          iconUrl: 'apartment.png',
+          iconSize: [35, 35]})
+      }).bindPopup(row.name + "</br>" + "<div class='chip' id='one_chip'> Apartment Rating:"+row.rating +"</div>" +"</br>" +"<div class='chip'>" + row.keyword1 +"</div>"  +"<div class='chip'>" + row.keyword2 +"</div>"  +"<div class='chip'>" + row.keyword3 +"</div>");
+  
       marker.on("mouseover", function () {
         this.openPopup();
       });
-
+  
       marker.on("mouseout", function () {
         this.closePopup();
       });
-
+  
+      marker.index = i
+  
       function add_marker(d){var i = d.target.index
-      for (var j in ResData){
-      if (ResData[j].cluster === CurrentData[i].cluster)
-    {var res_marker = L.marker(
-      [ResData[j].latitude, ResData[j].longitude],
-      {opacity: 1,
-        icon: L.icon({
-          iconUrl: 'restaurant.png',
-          iconSize: [30, 30]})}
-    ).addTo(res_markers)}}}
-
+        for (var j in ResData){
+          if (ResData[j].cluster === data[i].cluster){
+            var res_marker = L.marker(
+              [ResData[j].latitude, ResData[j].longitude],{
+              opacity: 1,
+              icon: L.icon({
+              iconUrl: 'restaurant.png',
+              iconSize: [30, 30]})}
+               ).addTo(res_markers)
+            .bindPopup(ResData[j].name);
+            
+            res_marker.on("mouseover", function () {
+                this.openPopup();
+              });
+          
+            res_marker.on("mouseout", function () {
+                this.closePopup();
+              });
+                
+          }
+        }
+      }
+  
       marker.on('click',function(d) {
-
-
-      if(res_markers.getLayers().length>0){res_markers.clearLayers();console.log('the map had the layer');}
-      add_marker(d);
-
-
-    })
+        if(res_markers.getLayers().length>0){
+          res_markers.clearLayers();
+          console.log('the map had the layer');
+        }
+        add_marker(d);
+      })
 
 
       markers.addLayer(marker);
@@ -398,34 +442,48 @@ function searchApartment(element){
           iconUrl: 'apartment.png',
           iconSize: [35, 35]})
       }).bindPopup(row.name + "</br>" + "<div class='chip' id='one_chip'> Apartment Rating:"+row.rating +"</div>" +"</br>" +"<div class='chip'>" + row.keyword1 +"</div>"  +"<div class='chip'>" + row.keyword2 +"</div>"  +"<div class='chip'>" + row.keyword3 +"</div>");
-
+  
       marker.on("mouseover", function () {
         this.openPopup();
       });
-
+  
       marker.on("mouseout", function () {
         this.closePopup();
       });
-
+  
+      marker.index = i
+  
       function add_marker(d){var i = d.target.index
-      for (var j in ResData){
-      if (ResData[j].cluster === CurrentData[i].cluster)
-    {var res_marker = L.marker(
-      [ResData[j].latitude, ResData[j].longitude],
-      {opacity: 1,
-        icon: L.icon({
-          iconUrl: 'restaurant.png',
-          iconSize: [30, 30]})}
-    ).addTo(res_markers)}}}
-
+        for (var j in ResData){
+          if (ResData[j].cluster === data[i].cluster){
+            var res_marker = L.marker(
+              [ResData[j].latitude, ResData[j].longitude],{
+              opacity: 1,
+              icon: L.icon({
+              iconUrl: 'restaurant.png',
+              iconSize: [30, 30]})}
+               ).addTo(res_markers)
+            .bindPopup(ResData[j].name);
+            
+            res_marker.on("mouseover", function () {
+                this.openPopup();
+              });
+          
+            res_marker.on("mouseout", function () {
+                this.closePopup();
+              });
+                
+          }
+        }
+      }
+  
       marker.on('click',function(d) {
-
-
-      if(res_markers.getLayers().length>0){res_markers.clearLayers();console.log('the map had the layer');}
-      add_marker(d);
-
-
-    })
+        if(res_markers.getLayers().length>0){
+          res_markers.clearLayers();
+          console.log('the map had the layer');
+        }
+        add_marker(d);
+      })
 
 
 
