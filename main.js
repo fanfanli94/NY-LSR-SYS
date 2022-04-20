@@ -273,8 +273,8 @@ function gettingresult(e){
       opacity: 1,
       icon: L.icon({
         iconUrl: 'apartment.png',
-        iconSize: [30, 30]})
-    }).bindPopup(row.name);
+        iconSize: [35, 35]})
+    }).bindPopup(row.name + "</br>" + "<div class='chip' id='one_chip'> Apartment Rating:"+row.rating +"</div>" +"</br>" +"<div class='chip'>" + row.keyword1 +"</div>"  +"<div class='chip'>" + row.keyword2 +"</div>"  +"<div class='chip'>" + row.keyword3 +"</div>");
 
     marker.on("mouseover", function () {
       this.openPopup();
@@ -341,8 +341,8 @@ function searchApartment(element){
           opacity: 1,
           icon: L.icon({
             iconUrl: 'apartment.png',
-            iconSize: [30, 30]})
-      }).bindPopup(row.name);
+            iconSize: [35, 35]})
+      }).bindPopupbindPopup(row.name + "</br>" + "<div class='chip' id='one_chip'> Apartment Rating:"+row.rating +"</div>" +"</br>" +"<div class='chip'>" + row.keyword1 +"</div>"  +"<div class='chip'>" + row.keyword2 +"</div>"  +"<div class='chip'>" + row.keyword3 +"</div>");
 
       marker.on("mouseover", function () {
         this.openPopup();
@@ -396,8 +396,8 @@ function searchApartment(element){
         opacity: 1,
         icon: L.icon({
           iconUrl: 'apartment.png',
-          iconSize: [30, 30]})
-      }).bindPopup(row.name);
+          iconSize: [35, 35]})
+      }).bindPopup(row.name + "</br>" + "<div class='chip' id='one_chip'> Apartment Rating:"+row.rating +"</div>" +"</br>" +"<div class='chip'>" + row.keyword1 +"</div>"  +"<div class='chip'>" + row.keyword2 +"</div>"  +"<div class='chip'>" + row.keyword3 +"</div>");
 
       marker.on("mouseover", function () {
         this.openPopup();
