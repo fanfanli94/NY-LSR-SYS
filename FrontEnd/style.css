@@ -3,6 +3,11 @@
     height: 65%;
 }
 
+#one_chip{
+  background-color: #000;
+  color:white;
+}
+
 .card-image{
    height: 150px;
 }
