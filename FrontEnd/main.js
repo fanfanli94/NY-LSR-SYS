@@ -84,6 +84,9 @@ noUiSlider.create(price_slider, {
   pips: {mode: 'range', density: 10}
 });
 
+function zoomback(){
+  map.setView([40.71427, -74.00597],10);
+}
 //-----------------------------------------------sort the data-------------------------------------------------------//
 
 function dataSort(dataInput){
@@ -176,7 +179,15 @@ $.get('apt_final.csv', function(csvString) {
       icon: L.icon({
         iconUrl: 'restaurant.png',
         iconSize: [30, 30]})}
-  ).addTo(res_markers)}}}
+  ).addTo(res_markers).bindPopup(ResData[j].name);
+          
+  res_marker.on("mouseover", function () {
+      this.openPopup();
+    });
+
+  res_marker.on("mouseout", function () {
+      this.closePopup();
+    });}}}
 
     marker.on('click',function(d) {
 
@@ -294,7 +305,15 @@ function gettingresult(e){
       icon: L.icon({
         iconUrl: 'restaurant.png',
         iconSize: [30, 30]})}
-  ).addTo(res_markers)}}}
+  ).addTo(res_markers).bindPopup(ResData[j].name);
+          
+  res_marker.on("mouseover", function () {
+      this.openPopup();
+    });
+
+  res_marker.on("mouseout", function () {
+      this.closePopup();
+    });}}}
 
     marker.on('click',function(d) {
 
@@ -361,7 +380,15 @@ function searchApartment(element){
         icon: L.icon({
           iconUrl: 'restaurant.png',
           iconSize: [30, 30]})}
-    ).addTo(res_markers)}}}
+    ).addTo(res_markers).bindPopup(ResData[j].name);
+          
+    res_marker.on("mouseover", function () {
+        this.openPopup();
+      });
+  
+    res_marker.on("mouseout", function () {
+        this.closePopup();
+      });}}}
 
       marker.on('click',function(d) {
 
@@ -416,7 +443,15 @@ function searchApartment(element){
         icon: L.icon({
           iconUrl: 'restaurant.png',
           iconSize: [30, 30]})}
-    ).addTo(res_markers)}}}
+    ).addTo(res_markers).bindPopup(ResData[j].name);
+          
+    res_marker.on("mouseover", function () {
+        this.openPopup();
+      });
+  
+    res_marker.on("mouseout", function () {
+        this.closePopup();
+      });}}}
 
       marker.on('click',function(d) {
 
