@@ -167,26 +167,26 @@ $.get('apt.csv', function(csvString) {
 
     marker.index = i
 
+    function add_marker(d){var i = d.target.index
+    for (var j in ResData){
+    if (ResData[j].cluster === data[i].cluster)
+  {var res_marker = L.marker(
+    [ResData[j].latitude, ResData[j].longitude],
+    {opacity: 1,
+      icon: L.icon({
+        iconUrl: 'restaurant.png',
+        iconSize: [30, 30]})}
+  ).addTo(res_markers)}}}
+
     marker.on('click',function(d) {
-      var i = d.target.index
-      for (var j in ResData){
-      if (ResData[j].cluster === data[i].cluster)
-    {var res_marker = L.marker(
-      [ResData[j].latitude, ResData[j].longitude],
-      {opacity: 1,
-        icon: L.icon({
-          iconUrl: 'restaurant.png',
-          iconSize: [30, 30]})}
-    ).addTo(res_markers)
-      if(res_markers.hasLayer(res_marker)){res_markers.clearLayers();console.log('the map had the layer');}
-      res_markers.addLayer(res_marker);
 
 
-  }}
+    if(res_markers.getLayers().length>0){res_markers.clearLayers();console.log('the map had the layer');}
+    add_marker(d);
 
-  }
 
-)
+  })
+
 
     markers.addLayer(marker);
   }
@@ -285,26 +285,27 @@ function gettingresult(e){
     });
     marker.index = i
 
+    function add_marker(d){var i = d.target.index
+    for (var j in ResData){
+    if (ResData[j].cluster === CurrentData[i].cluster)
+  {var res_marker = L.marker(
+    [ResData[j].latitude, ResData[j].longitude],
+    {opacity: 1,
+      icon: L.icon({
+        iconUrl: 'restaurant.png',
+        iconSize: [30, 30]})}
+  ).addTo(res_markers)}}}
+
     marker.on('click',function(d) {
-      var i = d.target.index
-      for (var j in ResData){
-      if (ResData[j].cluster === CurrentData[i].cluster)
-    {var res_marker = L.marker(
-      [ResData[j].latitude, ResData[j].longitude],
-      {opacity: 1,
-        icon: L.icon({
-          iconUrl: 'restaurant.png',
-          iconSize: [35, 35]})}
-    ).addTo(res_markers)
-      if(res_markers.hasLayer(res_marker)){res_markers.clearLayers();console.log('the map had the layer');}
-      res_markers.addLayer(res_marker);
 
 
-  }}
+    if(res_markers.getLayers().length>0){res_markers.clearLayers();console.log('the map had the layer');}
+    add_marker(d);
 
-  }
 
-)
+  })
+
+
     markers.addLayer(marker);
 
   }
@@ -351,26 +352,26 @@ function searchApartment(element){
         this.closePopup();
       });
 
+      function add_marker(d){var i = d.target.index
+      for (var j in ResData){
+      if (ResData[j].cluster === CurrentData[i].cluster)
+    {var res_marker = L.marker(
+      [ResData[j].latitude, ResData[j].longitude],
+      {opacity: 1,
+        icon: L.icon({
+          iconUrl: 'restaurant.png',
+          iconSize: [30, 30]})}
+    ).addTo(res_markers)}}}
+
       marker.on('click',function(d) {
-        var i = d.target.index
-        for (var j in ResData){
-        if (ResData[j].cluster === CurrentData[i].cluster)
-      {var res_marker = L.marker(
-        [ResData[j].latitude, ResData[j].longitude],
-        {opacity: 1,
-          icon: L.icon({
-            iconUrl: 'restaurant.png',
-            iconSize: [35, 35]})}
-      ).addTo(res_markers)
-        if(res_markers.hasLayer(res_marker)){res_markers.clearLayers();console.log('the map had the layer');}
-        res_markers.addLayer(res_marker);
 
 
-    }}
+      if(res_markers.getLayers().length>0){res_markers.clearLayers();console.log('the map had the layer');}
+      add_marker(d);
 
-    }
 
-  )
+    })
+
 
       markers.addLayer(marker);
     }
@@ -406,27 +407,27 @@ function searchApartment(element){
         this.closePopup();
       });
 
+      function add_marker(d){var i = d.target.index
+      for (var j in ResData){
+      if (ResData[j].cluster === CurrentData[i].cluster)
+    {var res_marker = L.marker(
+      [ResData[j].latitude, ResData[j].longitude],
+      {opacity: 1,
+        icon: L.icon({
+          iconUrl: 'restaurant.png',
+          iconSize: [30, 30]})}
+    ).addTo(res_markers)}}}
+
       marker.on('click',function(d) {
-        var i = d.target.index
-        for (var j in ResData){
-        if (ResData[j].cluster === CurrentData[i].cluster)
-      {var res_marker = L.marker(
-        [ResData[j].latitude, ResData[j].longitude],
-        {opacity: 1,
-          icon: L.icon({
-            iconUrl: 'restaurant.png',
-            iconSize: [35, 35]})
-          }
-      ).addTo(res_markers)
-        if(res_markers.hasLayer(res_marker)){res_markers.clearLayers();console.log('the map had the layer');}
-        res_markers.addLayer(res_marker);
 
 
-    }}
+      if(res_markers.getLayers().length>0){res_markers.clearLayers();console.log('the map had the layer');}
+      add_marker(d);
 
-    }
 
-  )
+    })
+
+
 
       markers.addLayer(marker);
 
