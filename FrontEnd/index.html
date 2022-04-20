@@ -31,7 +31,15 @@
 
         <form class="container" id="search-form">
           <div class="row" style="margin-top: 10px">
-              <label class="filter-label">Crime Score</label>
+              <label class="filter-label" style="color:black">Total Score</label>
+          </div>
+          <div class="row">
+            <div class="col slider-col s10 offset-s1">
+              <div id="rate-selector" class="grey"></div>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 50px">
+            <label class="filter-label">Crime Score</label>
           </div>
           <div class="row">
             <div class="col slider-col s10 offset-s1">
@@ -39,19 +47,11 @@
             </div>
           </div>
           <div class="row" style="margin-top: 50px">
-            <label class="filter-label">Bus Score</label>
+            <label class="filter-label">Transportation Score</label>
           </div>
           <div class="row">
             <div class="col slider-col s10 offset-s1">
-              <div id="bus-selector" class="grey"></div>
-            </div>
-          </div>
-          <div class="row" style="margin-top: 50px">
-            <label class="filter-label">Subway Score</label>
-          </div>
-          <div class="row">
-            <div class="col slider-col s10 offset-s1">
-              <div id="sub-selector" class="grey"></div>
+              <div id="trans-selector" class="grey"></div>
             </div>
           </div>
           <div class="row" style="margin-top: 50px">
@@ -161,7 +161,7 @@
 
   </div>
   <script src="nouislider.js"></script>
-  <script src="main2.js"></script>
+  <script src="main.js"></script>
   <!-- JavaScript at end of body for optimized loading -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>

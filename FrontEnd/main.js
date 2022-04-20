@@ -16,8 +16,8 @@ noUiSlider.create(crime_slider, {
   pips: {mode: 'range' ,density: 10}
 });
 
-var bus_slider = document.getElementById("bus-selector");
-noUiSlider.create(bus_slider, {
+var rate_slider = document.getElementById("rate-selector");
+noUiSlider.create(rate_slider, {
   start: [0, 100],
   connect: true,
   step: 5,
@@ -33,8 +33,8 @@ noUiSlider.create(bus_slider, {
   pips: {mode: 'range', density: 10}
 });
 
-var sub_slider = document.getElementById("sub-selector");
-noUiSlider.create(sub_slider, {
+var trans_slider = document.getElementById("trans-selector");
+noUiSlider.create(trans_slider, {
   start: [0, 100],
   connect: true,
   step: 5,
@@ -95,6 +95,15 @@ function dataSort(dataInput){
     if(a.rating != b.rating){
       return b.rating - a.rating;
     }
+    else if(a.crime_rate != b.crime_rate){
+      return b.crime_rate - a.crime_rate;
+    }
+    else if(a.trans_rate != b.trans_rate){
+      return b.trans_rate - a.trans_rate;
+    }
+    else if(a.res_rate != b.res_rate){
+      return b.res_rate - a.res_rate;
+    }
     else {
       var nameA = a.name.toUpperCase();
       var nameB = b.name.toUpperCase();
@@ -149,6 +158,8 @@ $.get('apt_final.csv', function(csvString) {
   // For each row in data, create a marker and add it to the map
   // For each row, columns `Latitude`, `Longitude`, and `Title` are required
 
+  dataSort(data)
+  console.log(Object.keys(data).length)
 
   for (var i in data) {
     var row = data[i];
@@ -158,7 +169,10 @@ $.get('apt_final.csv', function(csvString) {
       icon: L.icon({
         iconUrl: 'apartment.png',
         iconSize: [35, 35]})
-    }).bindPopup(row.name + "</br>" + "<div class='chip' id='one_chip'> Apartment Rating:"+row.rating +"</div>" +"</br>" +"<div class='chip'>" + row.keyword1 +"</div>"  +"<div class='chip'>" + row.keyword2 +"</div>"  +"<div class='chip'>" + row.keyword3 +"</div>");
+    }).bindPopup("</br>" + "<div class='chip' id='one_chip'> Name: "+ row.name +"</div>"
+      + "</br>" + "<div class='chip' id='one_chip'> Apartment Score: "+ parseInt(row.rating) +"</div>" 
+     +"</br>" +"<div class='chip'>" + row.keyword1 +"</div>"  +"<div class='chip'>" + row.keyword2 +"</div>"  + 
+     "<div class='chip'>" + row.keyword3 +"</div>");
 
     marker.on("mouseover", function () {
       this.openPopup();
@@ -228,7 +242,10 @@ var page = 0;
 
 function newPage(index){
   page = index;
+  len = Object.keys(CurrentData).length
+
   for(var i = 0; i < 4; i++){
+    if(i + 4*page == len) break;
     apt_list[i].innerHTML=
       "<div class='collapsible-header'>"+
 
@@ -263,19 +280,27 @@ function gettingresult(e){
   Mapclean();
   e.preventDefault();
   var res_rate = res_slider.noUiSlider.get().map(val =>{ return parseFloat(val);});
-  var bus_rate = bus_slider.noUiSlider.get().map(val =>{ return parseFloat(val);});
-  var sub_rate = sub_slider.noUiSlider.get().map(val =>{ return parseFloat(val);});
+  var total_rate = rate_slider.noUiSlider.get().map(val =>{ return parseFloat(val);});
+  var trans_rate = trans_slider.noUiSlider.get().map(val =>{ return parseFloat(val);});
   var price_rate = price_slider.noUiSlider.get().map(val =>{ return parseFloat(val);});
   var crime_rate = crime_slider.noUiSlider.get().map(val =>{ return parseFloat(val);});
 
   markers = new L.MarkerClusterGroup();
 
   CurrentData = AllData.filter(d => {
-    return d.res_score >= res_rate[0] && d.res_score <= res_rate[1] && d.bus_score >= bus_rate[0] && d.bus_score <= bus_rate[1]&& d.sub_score >= sub_rate[0] && d.sub_score <= sub_rate[1]&& d.crime_score >= crime_rate[0] && d.crime_score <= crime_rate[1]&& d.starting_price >= price_rate[0] && d.starting_price <= price_rate[1];
+    return d.res_score >= res_rate[0] && d.res_score <= res_rate[1] 
+    && d.rating >= total_rate[0] && d.rating <= total_rate[1]
+    && d.trans_score >= trans_rate[0] && d.trans_score <= trans_rate[1]
+    && d.crime_score >= crime_rate[0] && d.crime_score <= crime_rate[1]
+    && d.starting_price >= price_rate[0] && d.starting_price <= price_rate[1];
   });
 
   dataSort(CurrentData);
   console.log(CurrentData);
+
+  page = 0;
+  newPage(0);
+
 
   for (var i in CurrentData) {
     var row = CurrentData[i];
@@ -285,7 +310,10 @@ function gettingresult(e){
       icon: L.icon({
         iconUrl: 'apartment.png',
         iconSize: [35, 35]})
-    }).bindPopup(row.name + "</br>" + "<div class='chip' id='one_chip'> Apartment Rating:"+row.rating +"</div>" +"</br>" +"<div class='chip'>" + row.keyword1 +"</div>"  +"<div class='chip'>" + row.keyword2 +"</div>"  +"<div class='chip'>" + row.keyword3 +"</div>");
+    }).bindPopup("</br>" + "<div class='chip' id='one_chip'> Name: "+ row.name +"</div>"
+    + "</br>" + "<div class='chip' id='one_chip'> Apartment Score: "+ parseInt(row.rating) +"</div>" 
+   +"</br>" +"<div class='chip'>" + row.keyword1 +"</div>"  +"<div class='chip'>" + row.keyword2 +"</div>"  + 
+   "<div class='chip'>" + row.keyword3 +"</div>");
 
     marker.on("mouseover", function () {
       this.openPopup();
@@ -318,7 +346,9 @@ function gettingresult(e){
     marker.on('click',function(d) {
 
 
-    if(res_markers.getLayers().length>0){res_markers.clearLayers();console.log('the map had the layer');}
+    if(res_markers.getLayers().length>0){
+      res_markers.clearLayers();
+      console.log('the map had the layer');}
     add_marker(d);
 
 
@@ -371,6 +401,8 @@ function searchApartment(element){
         this.closePopup();
       });
 
+      marker.index = i;
+
       function add_marker(d){var i = d.target.index
       for (var j in ResData){
       if (ResData[j].cluster === CurrentData[i].cluster)
@@ -416,6 +448,9 @@ function searchApartment(element){
    dataSort(CurrentData);
    console.log(CurrentData);
 
+   page = 0;
+   newPage(0);
+
    for (var i in CurrentData) {
       var row = CurrentData[i];
 
@@ -433,9 +468,11 @@ function searchApartment(element){
       marker.on("mouseout", function () {
         this.closePopup();
       });
+      marker.index = i;
 
       function add_marker(d){var i = d.target.index
       for (var j in ResData){
+
       if (ResData[j].cluster === CurrentData[i].cluster)
     {var res_marker = L.marker(
       [ResData[j].latitude, ResData[j].longitude],
