@@ -16,7 +16,7 @@ Click this [result](https://jingyi1030.github.io/test666/apartmentsystem/FrontEn
 2. Open up the console
 3. enter `cd + document link`
 4. enter `python3 -m http.server 8888` in the console
-5. Open `http://localhost:8888/code/` in your browser
+5. Open `http://localhost:8888/FrontEnd/` in your browser
 
 ## Our innovation
 
