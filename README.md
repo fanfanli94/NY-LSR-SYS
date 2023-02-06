@@ -8,7 +8,7 @@ We are building an online platform that provides proper recommendations for apar
 
 ### Cilck the following link 
 
-Click this [result](https://jingyi1030.github.io/test666/apartmentsystem/FrontEnd/) 
+Click this [result](https://fanfanli94.github.io/) 
 
 ### Download the Document:
 
